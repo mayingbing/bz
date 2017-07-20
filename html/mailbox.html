@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>书记信箱</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="../public/css/mailbox.css" rel="stylesheet" type="text/css" />
+    <link href="../public/css/header_footer.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-1.7.1.min.js"></script>
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/index.js"></script>
+</head>
+<body >
+
+<header>
+    <div class="rt-bk">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>书记信箱</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+
+<div class="company_logo"> 
+    <p>书记信箱</p>
+    <p>告诉我们您的建议</p>
+</div>
+
+    <p class="title">事件发生地点</p>
+    <input class="user" id="userCode" type="text" />
+    <p class="title">事件发生时间</p>
+    <input class="user" id="userCode" type="text" />
+    <p class="title">事件参与人员</p>
+    <input class="user" id="userCode" type="text" />
+    <p class="title">事件描述</p>
+    <input class="user" id="userCode" type="text" />
+
+    <div style="width: 100%;height: 30px;"></div>
+
+
+    <input id="submitbtn" class="btn" type="submit" value="提交" onclick="submit()"/>
+
+
+
+<script type="text/javascript">
+
+    function submit() {
+
+        var userCode = document.getElementById("userCode").value;
+        var userPWD = document.getElementById("userPWD").value;
+
+        if(userCode == ''|| userCode == null) {
+            alert('用户名不能为空');
+            return false;
+        }
+
+        if(userPWD == ''|| userPWD == null){
+            alert('密码不能为空');
+            return false;
+        }
+
+        $.ajax({
+            url: "http://47.94.239.193:8080/lmes/app/login.action",
+            type: "post",
+            dataType:"json",
+            data: "",
+            async: false,
+            success: function (obj) {
+                alert(obj.data);
+               
+            }
+        });
+    }
+
+</script>
+
+
+
+</body>
+</html>
+
+

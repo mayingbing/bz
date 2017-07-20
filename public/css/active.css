@@ -1,0 +1,38 @@
+body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,form,fieldset,legend,input{ margin:0; padding:0;}
+html {  width: 100%; font-family: 'Heiti SC', 'Microsoft YaHei'; font-size: 46px; outline: 0; -webkit-text-size-adjust:none;}
+body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; background-color:#dbdbdb;}
+
+
+.listtabel{
+    position:relative;
+    width:100%;
+    margin-top:2px;
+    border-collapse:separate;
+    border-spacing:5px 10px;
+}
+
+.listtabel tr td div{
+    width:64px;
+    height:64px;
+    border-radius: 6px;
+
+}
+.listtabel tr td p{
+    text-indent: 15px;
+    font-size:17px;
+    color:#8a8a8a;
+
+}
+.active_list{
+   width: 50px;
+   height: 44px;
+   margin: 0 auto;
+   line-height: 44px;
+   font-size: 18px;
+   border-bottom: 1px solid #f3b383;
+}
+.active_img{
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+}

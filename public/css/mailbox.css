@@ -1,0 +1,53 @@
+body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,form,fieldset,legend,input{ margin:0; padding:0;}
+html {  width: 100%; font-family: 'Heiti SC', 'Microsoft YaHei'; font-size: 46px; outline: 0; -webkit-text-size-adjust:none;}
+body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; background-color:#dbdbdb;}
+
+
+.company_logo{
+    widows: 100%;
+    height: 150px;
+    background: url("../images/91zf_03.JPG");
+    background-size: cover;
+    margin-top: 44px;
+    color: #ffffff;
+    text-align: center;
+}
+.company_logo p:first-child{
+    padding-top: 25px;
+    font-size: 18px;
+
+}
+.company_logo p:nth-child(2){
+    margin-top: 25px;
+    font-size: 13px;
+
+}
+
+.user{
+    width: 80%;
+    height: 35px;
+    margin-left: 10%;
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    position: relative;
+}
+.title{
+    margin-left: 10%;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.btn{
+    width: 80%;
+    height: 50px;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    line-height: 50px;
+    background-color: #17abe3;
+    border:none;
+    border-radius: 5px;
+}
+
