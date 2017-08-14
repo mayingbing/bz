@@ -1,6 +1,6 @@
 body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,form,fieldset,legend,input{ margin:0; padding:0;}
 html {  width: 100%; font-family: 'Heiti SC', 'Microsoft YaHei'; font-size: 46px; outline: 0; -webkit-text-size-adjust:none;}
-body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; background-color:#dbdbdb;}
+body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; background-color:#F7F7F7;}
 
 
 header{
@@ -52,3 +52,21 @@ footer{
     
 }
 .clear{ clear:both} 
+
+
+a{ 
+text-decoration:none; 
+color:#333; 
+} 
+
+
+
+
+
+
+
+
+
+
+
+

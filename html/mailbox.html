@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
     <link href="../public/css/mailbox.css" rel="stylesheet" type="text/css" />
     <link href="../public/css/header_footer.css" rel="stylesheet" type="text/css" />
-    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-1.7.1.min.js"></script>
-    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/index.js"></script>
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-3.2.1.js"></script> 
 </head>
 <body >
 
 <header>
-    <div class="rt-bk">
+    <div class="rt-bk" id="goback">
         <i class="bk"></i>
         <a href="">
         <p>返回</p>
@@ -43,36 +42,14 @@
     <input id="submitbtn" class="btn" type="submit" value="提交" onclick="submit()"/>
 
 
+<script charset='utf-8' language='javascript' type='text/javascript' >
 
-<script type="text/javascript">
-
-    function submit() {
-
-        var userCode = document.getElementById("userCode").value;
-        var userPWD = document.getElementById("userPWD").value;
-
-        if(userCode == ''|| userCode == null) {
-            alert('用户名不能为空');
-            return false;
-        }
-
-        if(userPWD == ''|| userPWD == null){
-            alert('密码不能为空');
-            return false;
-        }
-
-        $.ajax({
-            url: "http://47.94.239.193:8080/lmes/app/login.action",
-            type: "post",
-            dataType:"json",
-            data: "",
-            async: false,
-            success: function (obj) {
-                alert(obj.data);
-               
-            }
+    $(function(){
+        $("#goback").click(function(){
+            window.history.back();
         });
-    }
+    });
+
 
 </script>
 

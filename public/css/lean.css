@@ -19,7 +19,7 @@ body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; ba
 }
 .listtabel tr td p{
     text-indent: 15px;
-    font-size:17px;
+    font-size:14px;
     color:#8a8a8a;
 
 }

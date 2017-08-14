@@ -1,0 +1,107 @@
+body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,form,fieldset,legend,input{ margin:0; padding:0;}
+html {  width: 100%; font-family: 'Heiti SC', 'Microsoft YaHei'; font-size: 46px; outline: 0; -webkit-text-size-adjust:none;}
+body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; background-color:#dbdbdb;}
+
+.user{
+    height: 25px;
+    margin-left: 10%;
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    position: relative;
+    font-size: 14px;
+    line-height: 25px;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+.selcet{
+    height: 25px;
+
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    position: relative;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+
+.title{
+    margin-left: 7%;
+    font-size: 17px;
+    margin-bottom: 5px;
+    
+}
+.btn{
+    width: 80%;
+    height: 40px;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    line-height: 40px;
+    background-color: #e98f36;
+    border:none;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+.votelist{
+    width:100%;
+    margin-top: 60px;
+}
+
+.votelist div{
+    height: 33px;
+    font-size: 18px;
+    line-height: 33px;
+    
+}
+.listtabel{
+    position:relative;
+    width:90%;
+    margin-left: 5%;
+    margin-top:2px;
+    /*border-collapse:separate;*/
+    border-spacing:5px 10px;
+    text-align: center; 
+    border-collapse: collapse;
+}
+.listtabel tr td {
+    border:1px solid #8A8A8A;
+    height: 30px;
+}
+.listtabel tr td div{
+    width:64px;
+    height:64px;
+    border-radius: 6px;
+
+}
+.listtabel tr td p{
+    font-size:14px;
+    color:#8a8a8a;
+    text-align: center;
+}
+.slectlist{
+    position:relative;
+    width:100%;
+    margin-top:2px;
+    border-collapse:separate;
+    border-spacing:5px 10px;
+    text-align: center; 
+    /*border-collapse: collapse;*/
+}
+.slectlist tr td div{
+    width:64px;
+    height:64px;
+    border-radius: 6px;
+
+}
+.slectlist tr td p{
+    font-size:14px;
+    color:#8a8a8a;
+    text-align: center;
+}
+
+
+

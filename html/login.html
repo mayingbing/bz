@@ -5,8 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
     <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
     <link href="../public/css/index.css" rel="stylesheet" type="text/css" />
-    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-1.7.1.min.js"></script>
-    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/index.js"></script>
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-3.2.1.js"></script>
 </head>
 <body >
     <div class="company_logo"> 
@@ -15,54 +14,58 @@
         
     <div class="user">
         <div class="user_img"></div>
-        <input class="index_input" id="userCode" type="text" placeholder="用户名"/>
+        <input class="index_input" id="userCode" name="userCode" type="text" placeholder="用户名">
     </div>
     <div style="width: 100%;height: 30px;"></div>
     <div class="pass">
         <div class="password_img"></div>
-        <input class="index_input" id="userPWD" type="password" placeholder="密码"/>
+        <input class="index_input" id="userPWD" name="userPWD" type="password" placeholder="密码">
     </div>
     <div style="width: 100%;height: 30px;"></div>
 
 
-    <input id="submitbtn" class="btn" type="submit" value="登录" onclick="submit()"/>
+    <input id="submitbtn" class="btn" type="submit" value="登录"/>
 
     
 
     <div class="footer">
-        <a href="">注册</a>
-        <a href="">忘记密码？</a>
+        <a href="zhuce.html">注册</a>
+        <!-- <a href="">忘记密码？</a> -->
     </div>
 
 <script type="text/javascript">
 
-    function submit() {
 
-        var userCode = document.getElementById("userCode").value;
-        var userPWD = document.getElementById("userPWD").value;
+$(document).ready(function(){
 
-        if(userCode == ''|| userCode == null) {
-            alert('用户名不能为空');
+    $("#submitbtn").click(function(){
+        var user_name = $("#userCode").val();
+        var passwd = $("#userPWD").val();
+
+        if(user_name == ""  || user_name == null){
+            alert("账户不能为空");
+            return false;
+        }
+        if(passwd == ""  || passwd == null){
+            alert("密码不能为空");
             return false;
         }
 
-        if(userPWD == ''|| userPWD == null){
-            alert('密码不能为空');
-            return false;
-        }
+        var url = "http://47.94.239.193:8080/lmes/app/login.action";
+        var data = {
+            userCode:user_name,
+            userPWD:passwd
+        };
+        $.post(url,data,
+            function(data,status){
+                if(data.res == "Success"){
+                    location.href = "shouye.html"
+                }
+            },"json");
+    });
 
-        $.ajax({
-            url: "http://47.94.239.193:8080/lmes/app/login.action",
-            type: "post",
-            dataType:"json",
-            data: "",
-            async: false,
-            success: function (obj) {
-                alert(obj.data);
-               
-            }
-        });
-    }
+});
+
 
 </script>
 

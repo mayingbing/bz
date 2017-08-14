@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>问卷投票</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="../public/css/vote.css" rel="stylesheet" type="text/css" />
+    <link href="../public/css/header_footer.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-3.2.1.js"></script> 
+</head>
+<body >
+    <header>
+        <div class="rt-bk" id="goback">
+            <i class="bk"></i>
+            <a href="">
+            <p>返回</p>
+            </a>
+        </div>
+        <div class="top-name"><p>问卷投票</p></div>
+        <div class="top-ok"><p></p></div>
+    </header>
+
+    <div class="votelist" id="showlist">
+        
+    </div>
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+    $(function(){
+        $("#goback").click(function(){
+            window.history.back();
+        });
+    });
+    
+    $.post("http://47.94.239.193:8080/lmes/app/queryVote.action",{newsType : '1' ,userCode : "2" },function(data){
+        callback_data = data.res;
+        console.log(callback_data);
+        var voteItems = JSON.parse(callback_data.voteItems);
+        var voteinfo = voteItems.voteItems;
+        var htmlstr = "";
+        htmlstr = htmlstr + ' <p style="text-align: center;font-size:23px;color:#FFA07A;margin-bottom:15px;">投票</p>'+
+
+                            '<table class="listtabel" style="margin-bottom:30px;"> '+
+                                '<col style="width: 25%" />'+
+                                '<col style="width: 30%" />'+
+                                '<col style="width: 30%" />'+
+                                '<col style="width: 15%" />'+
+                                '<tr>'+
+                                    '<td >'+
+                                        '<p>标题</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>开始时间</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>结束时间</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>状态</p>'+
+                                    '</td>'+
+                                '</tr>'+
+                                '<tr>'+
+                                    '<td >'+
+                                        '<p>'+callback_data.title+'</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>'+callback_data.voteBdate+'</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>'+callback_data.voteEdate+'</p>'+
+                                    '</td>'+
+                                    '<td >'+
+                                        '<p>'+callback_data.voteState+'</p>'+
+                                    '</td>'+
+                                '</tr>'+
+                            '</table>';
+        if(callback_data.voteType == "1") {
+            htmlstr = htmlstr + '<table class="slectlist"> '+
+                                    '<col style="width: 20%" />'+
+                                    '<col style="width: 40%" />'+
+                                    '<col style="width: 40%" />'+
+                                    '<tr>'+
+                                        '<td >'+
+                                            '<p>选项</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>姓名</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>票数</p>'+
+                                        '</td>'+
+                                    '</tr>';
+                                   
+            for(var key in voteinfo){
+                var votevalue = voteinfo[key];
+                htmlstr = htmlstr + '<tr>'+
+                                        '<td >'+
+                                            '<label><input class="selcet" name="radio" type="radio" value="'+votevalue.itemID+'" /> </label> '+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>'+votevalue.itemName+'</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>'+votevalue.score+'</p>'+
+                                        '</td>'+
+                                    '</tr>';
+            }
+                htmlstr = htmlstr + '</table>';
+
+        }else if(callback_data.voteType == "2"){
+                htmlstr = htmlstr + '<table class="slectlist"> '+
+                                    '<col style="width: 20%" />'+
+                                    '<col style="width: 40%" />'+
+                                    '<col style="width: 40%" />'+
+                                    '<tr>'+
+                                        '<td >'+
+                                            '<p>选项</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>姓名</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>票数</p>'+
+                                        '</td>'+
+                                    '</tr>';
+            for(var key in voteinfo){
+                var votevalue = voteinfo[key];
+                htmlstr = htmlstr + '<tr>'+
+                                        '<td >'+
+                                            '<label><input class="selcet"  name="check" type="checkbox" value="'+votevalue.itemID+'" /> </label> '+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>'+votevalue.itemName+'</p>'+
+                                        '</td>'+
+                                        '<td >'+
+                                            '<p>'+votevalue.score+'</p>'+
+                                        '</td>'+
+                                    '</tr>';
+            }
+                htmlstr = htmlstr + '</table>';
+        }
+
+        htmlstr = htmlstr + '<input id="submitbtn" class="btn" type="submit" value="提交" onclick="submit('+callback_data.voteID+','+callback_data.voteType+')"/>'+
+        '<div style="margin-top: 25px;"><a class="title" style="color:blue;" href="questionnaire.html">问卷调查</a></div>';
+
+        $("#showlist").html(htmlstr);
+
+    },"json");
+
+
+
+
+    function submit(voteid,votetype){
+        var select_val =[]; 
+        if(votetype=="1"){
+            var curval = $("input[name='radio']:checked").val();
+            select_val.push(curval); 
+        }else if(votetype=="2"){
+            $('input[name="check"]:checked').each(function(){ 
+                select_val.push($(this).val()); 
+            }); 
+           
+        }
+
+        if(select_val == "" || select_val == null || select_val == "undefined"){
+            alert("请先投票");
+        }else{
+            var url = "http://47.94.239.193:8080/lmes/app/vote.action";
+            var itemidsarr = '{"voteItems":['
+            for(var key in select_val){
+                itemidsarr = itemidsarr + select_val[key] + "," ;
+            }
+            itemidsarr = itemidsarr.substr(0,itemidsarr.length-1)
+            itemidsarr = itemidsarr + "]}"
+            var selcet_json = {userCode : "2" , voteID : voteid , itemIDs : itemidsarr};
+            console.log(selcet_json);
+
+            $.post(url,selcet_json,function(data){
+                alert(data.data);
+                location.reload();
+            },"json");
+        }
+    }
+
+</script>
+</body>
+</html>
+
+
