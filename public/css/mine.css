@@ -7,10 +7,15 @@ body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; ba
     position:relative;
     width:100%;
     margin-top:2px;
-    border-collapse:separate;
-    border-spacing:5px 20px;
+    border-collapse:collapse;
+    border-spacing:0px 20px;
 }
-
+.listtabel tr td{
+    border-bottom: 1px solid #cdcdcd;
+    width:64px;
+    height:64px;
+    text-indent: 5px;
+}
 .listtabel tr td div{
     width:64px;
     height:64px;

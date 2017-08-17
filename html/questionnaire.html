@@ -21,7 +21,7 @@
     </header>
 
     <div class="votelist" id="showlist">
-        <p class="title" >问卷调查</p>
+       <!--  <p class="title" >问卷调查</p>
         <div><input class="user" name="vote" type="radio" value="0" />非常差 </div> 
         <div><input class="user" name="vote" type="radio" value="1" />差 </div> 
         <div><input class="user" name="vote" type="radio" value="2" />一般 </div> 
@@ -34,10 +34,10 @@
         <div><input class="user"  name="Fruit" type="checkbox" value="1" />1</div> 
         <div><input class="user"  name="Fruit" type="checkbox" value="2" />2</div> 
 
+ -->
 
 
-
-        <input id="submitbtn" class="btn" type="submit" value="提交问卷" onclick="submit()"/>
+        
     </div>
 
 <script charset='utf-8' language='javascript' type='text/javascript' >
@@ -48,16 +48,60 @@
         });
     
 
-        $.post("http://47.94.239.193:8080/lmes/app/questionnaire.action",null,function(data){
-        
-        console.log(data);
-            
-            
+        $.post("http://47.94.239.193:8080/lmes/app/questionnaire.action",{userCode : "2" ,questionType : "2"},function(data){
+
+            callback_data = data.res;
+            console.log(callback_data);
+            var voteItems = JSON.parse(callback_data.quesinfo);
+            voteinfo = voteItems.Singlesels;
+
+            var htmlstr = "";
+
+            for(var key in voteinfo){
+                var obj = voteinfo[key];
+                var num = ++key;
+                htmlstr = htmlstr + '<p class="title" >'+num+":"+obj.question+'</p>'+
+                                    '<div><input class="user" name="'+obj.questionID+'" type="radio" value="A" />'+obj.choiceA+' </div> '+
+                                    '<div><input class="user" name="'+obj.questionID+'" type="radio" value="B" />'+obj.choiceB+' </div> '+
+                                    '<div><input class="user" name="'+obj.questionID+'" type="radio" value="C" />'+obj.choiceC+' </div> '+
+                                    '<div><input class="user" name="'+obj.questionID+'" type="radio" value="D" />'+obj.choiceD+' </div> '+
+                                    '<div style="width: 100%;height: 30px;"></div>';
+            }
+            htmlstr = htmlstr + '<input id="submitbtn" class="btn" type="submit" value="提交问卷" onclick="submit('+callback_data.quesID+')"/>'+
+                                '<div style="width: 100%;height: 30px;"></div>';
+
+            $("#showlist").html(htmlstr);
 
         },"json");
     });
 
-    
+    function submit(id){
+        var backdata = "{'answer':[";
+        for(var key in voteinfo){
+            console.log(voteinfo);
+            var obj = voteinfo[key];
+            var curid = obj.questionID;
+            var str = 'input[name= '+curid+' ]:checked'
+            var curval = $(str).val();
+            if( curval=="A"||curval=="B"||curval=="C"||curval=="D"){
+                backdata = backdata + curid + ":" + curval + ",";
+            }else{
+                var num = ++key;
+                var errstr = "第"+num+"题还未答，请答完题再提交。" 
+                alert(errstr);
+                backdata = "[";
+                return false;
+            }
+        }
+        backdata = backdata.substr(0,backdata.length-1);
+        backdata = backdata + "]}"
+        var selcet_json = {userCode : "2" , questionType : "2" ,quesID : id, answers : backdata};
+        console.log(selcet_json);
+        var url = "http://47.94.239.193:8080/lmes/app/subnaire.action";
+        $.post(url,selcet_json,function(data){
+            console.log(data);
+        },"json");
+    }
 
 
     

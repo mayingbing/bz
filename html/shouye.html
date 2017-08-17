@@ -7,13 +7,44 @@
     <link href="../public/css/header_footer.css" rel="stylesheet" type="text/css" />
     <link href="../public/css/shouye.css" rel="stylesheet" type="text/css" />
     <link href="../public/css/iconfont.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../public/css/style.css"/>
+
+    <!--Luara样式文件-->
+    <!--渐隐样式-->
+    <link rel="stylesheet" href="../public/css/luara.css"/>
+    <!--左滑样式-->
+    <link rel="stylesheet" href="../public/css/luara.left.css"/>
+    <!--上滑样式-->
+    <link rel="stylesheet" href="../public/css/luara.top.css"/>
     <script script charset='utf-8' language='javascript' type='text/javascript' src="../public/js/jquery-3.2.1.js"></script>
+    <script src="../public/js/jquery.luara.0.0.1.min.js"></script>
 </head>
 
 <body>
-<div class="shouye_logo"> 
+<!--Luara图片切换骨架begin-->
+<div class="example">
+    <ul>
+        <li><img src="../public/images/1.jpg" alt="1"/></li>
+        <li><img src="../public/images/2.jpg" alt="2"/></li>
+        <li><img src="../public/images/3.jpg" alt="3"/></li>
+        <li><img src="../public/images/4.jpg" alt="4"/></li>
+    </ul>
+    <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
 </div>
- <div style="position:relative;left:7%;bottom:0;width:86%;background:white;">
+<!--Luara图片切换骨架end-->
+<script>
+$(function(){
+    <!--调用Luara示例-->
+    $(".example").luara({width:"100%",height:"200px",interval:4000,selected:"seleted"});
+
+});
+</script>
+ <div style="position:relative;width:100%;background:white;">
         <table class="listtabel">
             <tr>
                 <td>
@@ -59,7 +90,14 @@
                         <p>书记信箱</p>
                     </a>
                 </td>
-               
+               <td>
+                    <a href="questionnaire.html">
+                        <div style="background-color:#7fc168">
+                             <div class="icon iconfont icon-lianxi"></div>
+                        </div>
+                        <p>问卷投票</p>
+                    </a>
+                </td>
             </tr>
         </table>
     </div>  
