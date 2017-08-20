@@ -39,7 +39,7 @@
 </div> -->
 <div class="clear"></div> 
 
-<div style="position:relative;top:44px;bottom:0;width:100%;background:white;z-index: 50;" id="showlist">
+<div style="position:relative;left:3%;bottom:0;width:95%;background:white;z-index: 50;" id="showlist">
     
 </div>  
 <div class="clear"></div> 
@@ -84,12 +84,12 @@ console.log(callback_data);
                         '</td>'+
                         '<td >';
 
-                    // for(var key in imgarr){
-                    //     var curimg = imgarr[key];
-                    //     curimg = curimg.replace("\"","");
-                    //     console.log(curimg);
-                    //     htmlstr = htmlstr + '<label style="float: left;margin-left:5px;margin-top:10px;"><img class="active_img" onerror=\'this.src='+ src_url +'\'  src='+curimg+'></label>';
-                    // }
+                    for(var key in imgarr){
+                        var curimg = imgarr[key];
+                        curimg = curimg.replace("\"","");
+                        console.log(curimg);
+                        htmlstr = htmlstr + '<label style="float: left;margin-left:5px;margin-top:10px;"><img class="active_img" onerror=\'this.src='+ src_url +'\'  src='+curimg+'></label>';
+                    }
             htmlstr = htmlstr + '</td>'+
                     '</tr>'+
                     '<tr>'+
