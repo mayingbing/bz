@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>网上家园</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
+    <link href="css/nethome.css" rel="stylesheet" type="text/css" />
+    <link href="css/bbs.css" rel="stylesheet" type="text/css" />
+    <link href="css/iconfont.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+</head>
+
+<body>
+<header>
+    <div class="rt-bk" id="goback">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>网上家园</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+<div class="clear" style="margin-top:50px;"></div> 
+
+<div id = "showlist">
+
+    
+    
+</div>
+
+<div class="clear"></div> 
+<div style="width:100%;height:70px;z-index: 50;"></div>
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+    $(function(){
+        $("#goback").click(function(){
+            window.history.back();
+        });
+
+        $.post("http://47.94.239.193:8080/lmes/app/queryNews.action",{newsType : '5' ,userCode : "1" },function(data){
+            console.log(data);
+            callback_data = data.res;
+            var src_url = '"img/alt.png"';
+
+            var htmlstr = "";
+            for(var key in callback_data){
+                var curr_value = callback_data[key];
+                // htmlstr = htmlstr + '<div style="position:relative;width:100%;background:white;z-index: 50;border-bottom:1px solid #1f1f1f">'+
+                //                         '<table class="listtabel">'+
+                //                             '<col style="width: 25%" />'+
+                //                             '<col style="width: 73%" />'+
+                //                             '<tr>'+
+                //                                 '<td style="vertical-align:top">'+
+                //                                    '<div style=\'width:80px;height:80px;\'>'+
+                //                                         '<img style="width:80px;height:80px;" onerror=\'this.src='+ src_url +'\'  src='+curr_value.headimage+'>'+
+                //                                     '</div>'+
+                //                                 '</td>'+
+                //                                 '<td >'+
+                //                                     curr_value.context+
+                //                                 '</td>'+
+                //                             '</tr>'+
+                                           
+                //                             '<tr>'+
+                //                                 '<td >'+
+                                                    
+                //                                 '</td>'+
+                //                                 '<td >'+
+                //                                     '<p style="font-size:8px;text-indent:1px;float:left;line-height:25px;">'+curr_value.pubtime+'</p>'+
+                //                                     '<label><div style="float:right;width:25px;height:25px;margin-top:10px;">'+
+                //                                         '<img style="width:25px;height:25px;" onerror=\'this.src='+ src_url +'\' onclick="edit(this,'+ curr_value.newsId +')"'+  'src='+"img/text.png"+'>'+
+                //                                     '</div></label>'+
+                //                                 '</td>'+
+                //                             '</tr>'+
+                //                         '</table>'+
+                //                     '</div>';
+
+
+                htmlstr = htmlstr + '<div class="cell" >'+
+                                    '<table cellpadding="0" cellspacing="0" border="0" width="100%">'+
+                                        '<tr>'+
+                                            '<td width="auto" valign="middle">'+
+                                                '<span class="item_title"><a href="bbs.html?newsid='+curr_value.newsId+'">'+curr_value.title+'</a></span>'+
+                                                '<div style="height: 3px;border-bottom: 1px solid #e2e2e2;"></div>'+
+                                                '<div style="height: 3px;"></div>'+
+                                                '<span class="small"><div class="votes"></div><strong><a href="#">'+curr_value.author+'</a></strong> &nbsp;•&nbsp; '+curr_value.pubtime+' &nbsp;•&nbsp; 111111</span>'+
+                                            '</td>'+
+                                            
+                                        '</tr>'+
+                                    '</table>'+
+                                '</div>';
+
+
+                    
+            }
+            $("#showlist").html(htmlstr);
+        },"json");
+    });
+
+
+</script>
+
+</body>
+</html>

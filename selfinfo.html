@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>个人中心</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
+    <link href="css/mine.css" rel="stylesheet" type="text/css" />
+    <link href="css/iconfont.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+</head>
+
+<body>
+
+<header>
+    <div class="rt-bk" id="goback">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>个人中心</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+<div class="clear"></div> 
+
+<div style="position:relative;width:100%;background:white;margin-top:46px;">
+    <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
+        <col style="width: 25%" />
+        <col style="width: 60%" />
+        <col style="width: 5%" />
+        <tr>
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">头像</p>
+            </td>
+
+            <td >
+                <img style="width:56px;height:56px;margin-top:4px;border-radius:5px;float:right;" id="heardimg" src="img/alt.png" />
+            </td>
+            <td >
+                <label>
+                    <div style='width:15px;height:20px;background: url("img/arrow.png") ;background-size:15px 20px;float:right;'></div>
+                </label>
+            </td>
+        </tr>
+    </table>
+    <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
+        <col style="width: 25%" />
+        <col style="width: 60%" />
+        <col style="width: 5%" />
+        <tr>
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">姓名</p>
+            </td>
+
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:right;color:#8a8a8a" id="username">姓名</p>
+            </td>
+            <td >
+                
+            </td>
+        </tr>
+
+    </table>
+    <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
+        <col style="width: 25%" />
+        <col style="width: 60%" />
+        <col style="width: 5%" />
+        <tr>
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">性别</p>
+            </td>
+            <td >
+                <label style="float:right;font-size:18px;"><input name="sex" type="radio" value="2" />女</label> 
+                <label style="float:right;font-size:18px;"><input name="sex" type="radio" value="1" checked="checked"/>男</label> 
+            </td>
+            <td >
+                
+            </td>
+        </tr>
+
+    </table>
+    <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
+        <col style="width: 25%" />
+        <col style="width: 60%" />
+        <col style="width: 5%" />
+        <tr>
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">手机号</p>
+            </td>
+            <td >
+                <a href="edit_tel.html">
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:right;color:#8a8a8a" id="phone">手机号</p>
+                </a>
+            </td>
+            <td >
+                <a href="edit_tel.html">
+                <label>
+                    <div style='width:15px;height:20px;background: url("img/arrow.png") ;background-size:15px 20px;float:right;'></div>
+                </label>
+                </a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</div> 
+
+<div style="width:210px;height:64px;margin:0 auto;">
+
+    <input type="button" style="width:100px;height:44px;margin-top:10px;text-align:center;float:left;background-color:#bfbfbf;" value="确定" />
+    <input type="button" style="width:100px;height:44px;margin-top:10px;text-align:center;background-color:#fff;margin-left:10px" value="取消" />
+
+</div>
+
+<div class="clear"></div> 
+
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+$(function(){
+    $("#goback").click(function(){
+        window.history.back();
+    });
+
+    $.post("http://47.94.239.193:8080/lmes/app/queryUserInfo.action",{userCode : "2" },function(data){
+        console.log(data);
+        callback_data = data.res;
+        if(callback_data.headImage != null && callback_data.headImage != ''){
+            $("#heardimg").attr('src',callback_data.headImage); 
+        }
+        if(callback_data.userName != null && callback_data.userName != ''){
+            $("#username").html(callback_data.userName); 
+        }
+        if(callback_data.sex != null && callback_data.sex != ''){
+            $(":radio[name='sex'][value='" + callback_data.sex + "']").prop("checked", "checked");
+        }
+        if(callback_data.phone != null && callback_data.phone != ''){
+            $("#phone").html(callback_data.phone); 
+        }
+        
+    },"json");
+   
+});
+
+    
+
+
+    
+
+</script>
+
+
+</body>
+</html>

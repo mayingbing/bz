@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>书记信箱</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="css/mailbox.css" rel="stylesheet" type="text/css" />
+    <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+</head>
+<body >
+
+<header>
+    <div class="rt-bk" id="goback">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>书记信箱</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+
+<div class="company_logo"> 
+    <p>书记信箱</p>
+    <p>告诉我们您的建议</p>
+</div>
+
+    <p class="title">事件发生地点</p>
+    <input class="user" id="addr" type="text" />
+    <p class="title">事件发生时间</p>
+    <input class="user" id="time" type="text" />
+    <p class="title">事件参与人员</p>
+    <input class="user" id="people" type="text" />
+    <p class="title">事件描述</p>
+    <textarea class="user" id="content" ></textarea>
+
+    <div style="width: 100%;height: 30px;"></div>
+
+
+    <input id="submitbtn" class="btn" type="submit" value="提交" onclick="submit()"/>
+    <div style="width: 100%;height: 30px;"></div>
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+    $(function(){
+        $("#goback").click(function(){
+            window.history.back();
+        });
+    });
+    function submit(){
+        var addr = $("#addr").val();
+        var time = $("#time").val();
+        var people = $("#people").val();
+        var content = $("#content").val();
+        if(addr==null || addr == ""){
+            alert("事件发生地点不能为空");
+            return false;
+        }
+        if(time==null || time == ""){
+            alert("事件发生时间不能为空");
+            return false;
+        }
+        if(people==null || people == ""){
+            alert("事件参与人员不能为空");
+            return false;
+        }
+        if(content==null || content == ""){
+            alert("事件描述不能为空");
+            return false;
+        }
+
+        $.post("http://47.94.239.193:8080/lmes/app/bossBox.action",{place : addr ,bosstime : time,member:people,des:content,userCode : "2" },function(data){
+
+            alert(data.res);
+
+        },"json");    
+    }
+
+</script>
+
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>个人中心</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
+    <link href="css/mine.css" rel="stylesheet" type="text/css" />
+    <link href="css/iconfont.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+</head>
+
+<body>
+
+<header>
+    <div class="rt-bk" id="goback">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>个人中心</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+<div class="clear"></div> 
+
+<div style="position:relative;width:100%;background:white;margin-top:46px;">
+   
+    <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
+        <col style="width: 25%" />
+        <col style="width: 60%" />
+        <col style="width: 5%" />
+        <tr>
+            <td >
+                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">手机号</p>
+            </td>
+            <td >
+                <input type="text" placehold="手机号" style="width:100%;height:44px;margin-top:5px;border:1px solid #dbdbdb;font-size:18px;line-height:44px;" value="" id="phone"/>
+            </td>
+            <td >
+               
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</div> 
+
+<div style="width:210px;height:64px;margin:0 auto;">
+
+    <input type="button" style="width:100px;height:44px;margin-top:10px;text-align:center;float:left;background-color:#bfbfbf;" value="确定" onclick="submit()"/>
+    <input type="button" style="width:100px;height:44px;margin-top:10px;text-align:center;background-color:#fff;margin-left:10px" value="取消" onclick="cancel()"/>
+
+</div>
+
+<div class="clear"></div> 
+
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+$(function(){
+    $("#goback").click(function(){
+        window.history.back();
+    });
+
+    $.post("http://47.94.239.193:8080/lmes/app/queryUserInfo.action",{userCode : "2" },function(data){
+        console.log(data);
+        callback_data = data.res;
+       
+        if(callback_data.phone != null && callback_data.phone != ''){
+            $("#phone").val(callback_data.phone); 
+        }
+        
+    },"json");
+
+   
+});
+
+    function submit(){
+        var phones = $("#phone").val(); 
+        if(!IsTel(phones)) {
+            alert("手机号码输入不规范!");
+            document.getElementById("tel").value = '';
+            return false;
+        }else {
+            $.post("http://47.94.239.193:8080/lmes/app/modUserInfo.action",{userCode : "2",phone : phones},function(data){
+                console.log(data);
+                callback_data = data.res;
+            },"json");
+        }
+        
+        
+        
+    
+    }
+    function cancel(){
+        window.history.back();
+    }
+
+    function IsTel(num){
+        return (/^1[34578]\d{9}$/.test(num));
+    }
+   
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+  "active.html": {
+    "href": "active.html",
+    "priority": 0
+  },
+  "manage.html": {
+    "href": "manage.html",
+    "priority": 0
+  },
+  "questionnaire.html": {
+    "href": "questionnaire.html",
+    "priority": 0
+  },
+  "vote.html": {
+    "href": "vote.html",
+    "resources": [],
+    "refer": [
+      "questionnaire.html"
+    ],
+    "priority": 0
+  },
+  "nethome.html": {
+    "href": "nethome.html",
+    "priority": 0
+  },
+  "mailbox.html": {
+    "href": "mailbox.html",
+    "priority": 0
+  },
+  "mine.html": {
+    "href": "mine.html",
+    "resources": [],
+    "refer": [
+      "shouye.html",
+      "school.html",
+      "mine.html"
+    ],
+    "priority": 0
+  },
+  "school.html": {
+    "href": "school.html",
+    "resources": [],
+    "refer": [
+      "shouye.html",
+      "school.html",
+      "mine.html"
+    ],
+    "priority": 0
+  },
+  "shouye.html": {
+    "href": "shouye.html",
+    "resources": [],
+    "refer": [
+      "active.html",
+      "manage.html",
+      "vote.html",
+      "nethome.html",
+      "mailbox.html",
+      "shouye.html",
+      "school.html",
+      "mine.html"
+    ],
+    "priority": 0
+  },
+  "zhuce.html": {
+    "href": "zhuce.html",
+    "resources": [],
+    "refer": [
+      "shouye.html"
+    ],
+    "priority": 0
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [],
+    "refer": [
+      "shouye.html",
+      "zhuce.html"
+    ],
+    "priority": 0
+  }
+}

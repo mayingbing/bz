@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>党建动态</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
+    <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
+    <link href="css/active.css" rel="stylesheet" type="text/css" />
+    <link href="css/iconfont.css" rel="stylesheet" type="text/css" />
+    <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+</head>
+
+<body>
+<header>
+    <div class="rt-bk"  id="goback">
+        <i class="bk"></i>
+        <a href="">
+        <p>返回</p>
+        </a>
+    </div>
+    <div class="top-name"><p>掌上党校</p></div>
+    <div class="top-ok"><p></p></div>
+</header>
+
+<div style="width:100%;height:44px;border-bottom: 1px solid #dbdbdb">
+    <!-- <table style="width:100%;height:44px;font-size:14px;margin-top:50px;text-align:center;border-spacing:0px 0px;">
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <tr>
+            <td ><div class="active_list">全部</div></td>
+            <td ><div class="active_list">精华</div></td>
+            <td ><div class="active_list">分享</div></td>
+            <td ><div class="active_list">收藏</div></td>
+        </tr>
+    </table> -->
+
+</div>
+<div class="clear"></div> 
+
+<div style="position:relative;bottom:0;width:100%;background:white;z-index: 50;" id="showlist">
+    
+</div>  
+<div class="clear"></div> 
+<div style="width:100%;height:70px;z-index: 50;"></div>
+
+<script charset='utf-8' language='javascript' type='text/javascript' >
+
+$(function(){
+
+    $("#goback").click(function(){
+        window.history.back();
+    });
+
+    $.post("http://47.94.239.193:8080/lmes/app/queryNews.action",{newsType : '4' ,userCode : "2" },function(data){
+
+        callback_data = data.res;
+        var src_url = '"img/alt.png"';
+console.log(callback_data);
+        var htmlstr = "";
+        for(var key in callback_data){
+            var curr_value = callback_data[key];
+
+            var imgarr = curr_value.images;
+            if(imgarr){
+                var image_objs = JSON.parse(imgarr);
+                var imgarr = image_objs.images;
+            }
+           
+            htmlstr = htmlstr + '<table class="listtabel">'+
+                    '<col style="width: 25%" />'+
+                    '<col style="width: 73%" />'+
+                    '<tr>'+
+                        '<td style="vertical-align:top">'+
+                            '<div style="width:80px;height:80px;">'+
+                            '<img style="width:80px;height:80px;" onerror=\'this.src='+ src_url +'\'  src='+curr_value.headimage+'>'+
+                            '</div>'+
+                        '</td>'+
+                        '<td ><a href="school_content.html?newsid='+curr_value.newsId+'"><p>'+
+                             curr_value.title + 
+                        '</p></a></td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td >'+
+                        '</td>'+
+                        '<td >';
+
+                    // for(var key in imgarr){
+                    //     var curimg = imgarr[key];
+                    //     curimg = curimg.replace("\"","");
+                    //     console.log(curimg);
+                    //     htmlstr = htmlstr + '<label style="float: left;margin-left:5px;margin-top:10px;"><img class="active_img" onerror=\'this.src='+ src_url +'\'  src='+curimg+'></label>';
+                    // }
+            htmlstr = htmlstr + '</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td >'+
+                        '</td>'+
+                        '<td >'+
+                            '<p style="font-size:8px;text-indent:1px;float:left;line-height:25px;">'+curr_value.pubtime+'</p>'+
+                            '<label>'+
+                            '<div style="float:right;width:50px;height:20px;border-radius: 12.5px;" >'+
+                            
+                            '<p style="float:left;width:30px;height:20px;line-height:20px;font-size:8px;text-indent:1px;">'+curr_value.thumbCount+'</p>'+
+                            '<img src="img/laud'+curr_value.thumbUp+'.png" style="width:16px;height:16px;" onclick="changeimg(this,'+ curr_value.newsId +')" />'+
+                            '</div>'+
+                            '</label>'+
+                        '</td>'+
+                    '</tr>'+
+                '</table>'+
+                '<div style="width:100%;height:1px;border-top:1px solid #1f1f1f"></div>';
+        }
+
+
+        $("#showlist").html(htmlstr);
+
+    },"json");
+
+
+});
+function changeimg(luad,newsid){
+    var str = luad.src;
+    var back = str.substr(str.length-5);
+    if (back == "0.png"){
+        var url = "http://47.94.239.193:8080/lmes/app/upvote.action";
+        $.post(url,{newsId : newsid,userCode : "2"},function(data){
+            console.log(data);
+            if(data.thumbUp == "1"){
+                 luad.src = "../img/laud1.png";
+            }
+        },"json");
+    }
+   
+   
+
+}
+
+
+</script>
+</body>
+</html>
