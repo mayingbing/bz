@@ -6,19 +6,20 @@ body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; ba
     height: 25px;
     margin-left: 10%;
     background-color: white;
-    border: 1px solid #999999;
+    border: 1px solid #bfbfbf;
     border-radius: 5px;
     position: relative;
     font-size: 14px;
     line-height: 25px;
     margin-top: 4px;
     margin-right: 5px;
+
 }
 .selcet{
     height: 25px;
 
     background-color: white;
-    border: 1px solid #999999;
+    border: 1px solid #bfbfbf;
     border-radius: 5px;
     position: relative;
     font-size: 18px;
@@ -28,7 +29,7 @@ body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; ba
 }
 
 .title{
-    margin-left: 7%;
+    
     font-size: 17px;
     margin-bottom: 5px;
     
@@ -47,15 +48,21 @@ body {  width:100%; margin: 0; -webkit-user-select: none; position: relative; ba
     margin-top: 25px;
 }
 .votelist{
-    width:100%;
+    width:80%;
     margin-top: 60px;
+    margin-left: 10%;
+
+
 }
 
 .votelist div{
     height: 33px;
     font-size: 18px;
     line-height: 33px;
-    
+    border: 1px solid #e16531;
+    color: #e16531;
+    width: 100%;
+
 }
 .listtabel{
     position:relative;

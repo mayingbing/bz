@@ -1,13 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>个人中心</title>
+    <title>更换头像</title>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
     <meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0"/>
     <link href="css/header_footer.css" rel="stylesheet" type="text/css" />
     <link href="css/mine.css" rel="stylesheet" type="text/css" />
     <link href="css/iconfont.css" rel="stylesheet" type="text/css" />
     <script script charset='utf-8' language='javascript' type='text/javascript' src="js/jquery-3.2.1.js"></script> 
+
+    <style>
+        #exec_target{display:none;width:0;height:0;}
+        #feedback{width:120px;margin:0 auto;}
+        #feedback img{float:left;width:200px;height:200px;}    
+    </style>
 </head>
 
 <body>
@@ -19,34 +25,32 @@
         <p>返回</p>
         </a>
     </div>
-    <div class="top-name"><p>个人中心</p></div>
+    <div class="top-name"><p>更换头像</p></div>
     <div class="top-ok"><p></p></div>
 </header>
 
 <div class="clear"></div> 
 
 <div style="position:relative;width:100%;background:white;margin-top:46px;">
-   
     <table style="width:94%;margin-left:3%;height:64px;line-height:44px;border-bottom:1px solid #bfbfbf;">
-        <col style="width: 25%" />
-        <col style="width: 60%" />
-        <col style="width: 5%" />
+
         <tr>
             <td >
-                <p style="height:64px;line-height:64px;font-size:18px;text-align:left">手机号</p>
+                <p style="width:50px;height:64px;line-height:64px;font-size:14px;text-align:left">头像</p>
             </td>
+
             <td >
-                <input type="text" placehold="手机号" style="width:100%;height:44px;margin-top:5px;border:1px solid #dbdbdb;font-size:18px;line-height:44px;" value="" id="phone"/>
+                <form id="submit_form" method="post" action="http://47.94.239.193:8080/lmes/app/chnHeadImage.action" target="exec_target" enctype="multipart/form-data">
+                    <input type="file" name="headImage"  id="upload_file"> 
+                    <input type="text" name="userCode"  value="2">       <!-- 添加上传文件 -->
+                </form>
+                <iframe id="exec_target" name="exec_target"></iframe>    <!-- 提交表单处理iframe框架 -->
+                <div id="feedback"></div> 
             </td>
-            <td >
-               
-            </td>
+
         </tr>
-
     </table>
-
-
-
+    
 </div> 
 
 <div style="width:210px;height:64px;margin:0 auto;">
@@ -66,45 +70,29 @@ $(function(){
         window.history.back();
     });
 
-    $.post("http://47.94.239.193:8080/lmes/app/queryUserInfo.action",{userCode : "2" },function(data){
-        console.log(data);
-        callback_data = data.res;
-       
-        if(callback_data.phone != null && callback_data.phone != ''){
-            $("#phone").val(callback_data.phone); 
+    //iframe加载响应，初始页面时也有一次，此时data为null。
+    $("#exec_target").load(function(){
+        var data = $(window.frames['exec_target'].document.body).find("textarea").html();
+        //若iframe携带返回数据，则显示在feedback中
+        if(data != null){
+            $("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+            $("#upload_file").val('');
         }
-        
-    },"json");
-
+    });
    
 });
 
     function submit(){
-        var phones = $("#phone").val(); 
-        if(!IsTel(phones)) {
-            alert("手机号码输入不规范!");
-            document.getElementById("tel").value = '';
-            return false;
-        }else {
-            $.post("http://47.94.239.193:8080/lmes/app/modUserInfo.action",{userCode : "2",phone : phones},function(data){
-                console.log(data);
-                callback_data = data.res;
-                alert(callback_data);
-            },"json");
-        }
-        
-        
-        
-    
+
+       if($("#upload_file").val() != '') $("#submit_form").submit();
+
     }
     function cancel(){
         window.history.back();
-    }
+    } 
 
-    function IsTel(num){
-        return (/^1[34578]\d{9}$/.test(num));
-    }
-   
+
+    
 
 </script>
 
